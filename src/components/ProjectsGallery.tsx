@@ -7,7 +7,7 @@ const projects = [
   {
     title: "Tiny Legends",
     description: "AI-powered platform that creates engaging, age-appropriate content for children. Combines comic book analysis, AI character extraction, story generation, and visual storytelling experiences.",
-    image: "https://images.unsplash.com/photo-1577720086808-ee62b140bc0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9yeWJvb2slMjBjaGlsZHJlbiUyMGZhbnRhc3klMjBpbGx1c3RyYXRpb258ZW58MXx8fHwxNzYxMzI3NzUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://img.youtube.com/vi/d2wVIfOglys/maxresdefault.jpg",
     tags: ["TypeScript", "AI", "React", "MIT License"],
     githubUrl: "https://github.com/soul-bits/tiny_legends",
     demoUrl: "https://youtu.be/d2wVIfOglys",
