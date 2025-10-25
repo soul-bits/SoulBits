@@ -111,9 +111,12 @@ export function LearnSection() {
         >
           <Button
             className="bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/50 transition-all px-8 py-6"
+            asChild
           >
-            <ExternalLink className="w-4 h-4 mr-2" />
-            See All Videos on YouTube
+            <a href="https://www.youtube.com/channel/UCJ9bFPzRJuEk_EuoOq6ZQRg" target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="w-4 h-4 mr-2" />
+              See All Videos on YouTube
+            </a>
           </Button>
         </motion.div>
       </div>
