@@ -33,21 +33,26 @@ export function FeaturedProject() {
             <div className="grid md:grid-cols-2 gap-0">
               {/* Video/Image Section */}
               <div className="relative aspect-video md:aspect-auto bg-gradient-to-br from-primary/10 to-transparent flex items-center justify-center p-12">
-                <div className="relative w-full h-full rounded-xl overflow-hidden">
+                <a 
+                  href="https://www.youtube.com/watch?v=d2wVIfOglys" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative w-full h-full rounded-xl overflow-hidden group cursor-pointer"
+                >
                   <img
-                    src="https://images.unsplash.com/photo-1577720086808-ee62b140bc0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9yeWJvb2slMjBjaGlsZHJlbiUyMGZhbnRhc3klMjBpbGx1c3RyYXRpb258ZW58MXx8fHwxNzYxMzI3NzUyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                    alt="Tiny Legends"
-                    className="w-full h-full object-cover"
+                    src="https://img.youtube.com/vi/d2wVIfOglys/maxresdefault.jpg"
+                    alt="Tiny Legends Demo Video"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 flex items-center justify-center transition-colors">
                     <motion.div
                       whileHover={{ scale: 1.1 }}
-                      className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center cursor-pointer"
+                      className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center"
                     >
                       <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
                     </motion.div>
                   </div>
-                </div>
+                </a>
               </div>
 
               {/* Content Section */}
