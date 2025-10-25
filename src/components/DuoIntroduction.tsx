@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "./ui/button";
-import divyaPhoto from "figma:asset/9340577dfdebb30a1968f5f94d24f6dbe478d96c.png";
-import achinPhoto from "figma:asset/e36e94dfc8a9c3e35f0590f019a9d431ebfbeb0c.png";
+import divyaPhoto from "../assets/Divya.jpeg";
+import achinPhoto from "../assets/Achin.jpeg";
 
 export function DuoIntroduction() {
   return (
