@@ -19,7 +19,7 @@ export default function App() {
         <ProjectsGallery />
         <ThoughtsSection />
         <LearnSection />
-        <BlogSection />
+        {/* <BlogSection /> */}
         <EventsTimeline />
         <DuoIntroduction />
       </main>
