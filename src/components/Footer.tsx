@@ -110,7 +110,7 @@ export function Footer() {
         >
           <p className="text-sm text-muted-foreground">
             Made with curiosity and caffeine by{" "}
-            <span className="text-primary">#SoulBits</span> © 2024
+            <span className="text-primary">#SoulBits</span> © 2025
           </p>
         </motion.div>
       </div>
