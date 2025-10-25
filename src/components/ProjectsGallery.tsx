@@ -5,40 +5,33 @@ import { Button } from "./ui/button";
 
 const projects = [
   {
-    title: "CodeMentor AI",
-    description: "Interactive coding tutor powered by AI",
+    title: "Tiny Legends",
+    description: "AI-powered platform that creates engaging, age-appropriate content for children. Combines comic book analysis, AI character extraction, story generation, and visual storytelling experiences.",
+    image: "https://images.unsplash.com/photo-1577720086808-ee62b140bc0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9yeWJvb2slMjBjaGlsZHJlbiUyMGZhbnRhc3klMjBpbGx1c3RyYXRpb258ZW58MXx8fHwxNzYxMzI3NzUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    tags: ["TypeScript", "AI", "React", "MIT License"],
+    githubUrl: "https://github.com/soul-bits/tiny_legends",
+    demoUrl: "https://youtu.be/d2wVIfOglys",
+  },
+  {
+    title: "Upbeat Live Music Coach",
+    description: "Real-time, AI-powered piano tutor built on Gemini offering a proactive, real-time learning experience, bridging the gap between a private tutor and digital learning tools.",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaWFubyUyMG11c2ljJTIwdGVhY2hlcnxlbnwxfHx8fDE3NjEzMjc3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    tags: ["TypeScript", "AI", "Gemini", "MIT License"],
+    githubUrl: "https://github.com/soul-bits/upbeat-LiveMusicCoach",
+  },
+  {
+    title: "EchoDeck",
+    description: "AI-powered system that takes a short spoken prompt (≈3 minutes) and produces a polished presentation in multiple formats (PDF, HTML deck, narrated video).",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzZW50YXRpb24lMjBzbGlkZXN8ZW58MXx8fHwxNzYxMzI3NzUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    tags: ["TypeScript", "AI", "Presentations"],
+    githubUrl: "https://github.com/soul-bits/EchoDeck",
+  },
+  {
+    title: "LeetCode Solutions",
+    description: "Collection of LeetCode problem solutions with detailed explanations and optimized approaches for coding interviews.",
     image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["Python", "OpenAI", "React"],
-  },
-  {
-    title: "DataViz Studio",
-    description: "Beautiful data visualizations made simple",
-    image: "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfHx8fDE3NjEzMDM0MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["D3.js", "TypeScript", "Node.js"],
-  },
-  {
-    title: "SmartNotes",
-    description: "AI-enhanced note-taking for students",
-    image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["React", "Firebase", "AI/ML"],
-  },
-  {
-    title: "DevFlow",
-    description: "Streamlined workflow automation tool",
-    image: "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfHx8fDE3NjEzMDM0MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["Next.js", "PostgreSQL", "API"],
-  },
-  {
-    title: "SkillMap",
-    description: "Visual learning path generator",
-    image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["React", "GraphQL", "Neo4j"],
-  },
-  {
-    title: "BugHunter Pro",
-    description: "Intelligent debugging assistant",
-    image: "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfHx8fDE3NjEzMDM0MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    tags: ["Python", "AI", "VS Code"],
+    tags: ["Python", "Algorithms", "Data Structures"],
+    githubUrl: "https://github.com/soul-bits/leetcode-solutions",
   },
 ];
 
@@ -89,15 +82,23 @@ export function ProjectsGallery() {
                   <Button
                     size="icon"
                     className="bg-primary/90 text-primary-foreground hover:bg-primary hover:scale-110 transition-all"
+                    asChild
                   >
-                    <Github className="w-5 h-5" />
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Github className="w-5 h-5" />
+                    </a>
                   </Button>
-                  <Button
-                    size="icon"
-                    className="bg-primary/90 text-primary-foreground hover:bg-primary hover:scale-110 transition-all"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </Button>
+                  {project.demoUrl && (
+                    <Button
+                      size="icon"
+                      className="bg-primary/90 text-primary-foreground hover:bg-primary hover:scale-110 transition-all"
+                      asChild
+                    >
+                      <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </div>
 
