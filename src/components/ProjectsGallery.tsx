@@ -15,9 +15,10 @@ const projects = [
   {
     title: "Upbeat Live Music Coach",
     description: "Real-time, AI-powered piano tutor built on Gemini offering a proactive, real-time learning experience, bridging the gap between a private tutor and digital learning tools.",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaWFubyUyMG11c2ljJTIwdGVhY2hlcnxlbnwxfHx8fDE3NjEzMjc3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: "https://img.youtube.com/vi/R-OAZ-IH2NE/maxresdefault.jpg",
     tags: ["TypeScript", "AI", "Gemini", "MIT License"],
     githubUrl: "https://github.com/soul-bits/upbeat-LiveMusicCoach",
+    demoUrl: "https://www.youtube.com/watch?v=R-OAZ-IH2NE&list=PLEFt4nVWzKBKpx5h_FCVg-K3oKxe2R8bY",
   },
   {
     title: "EchoDeck",
