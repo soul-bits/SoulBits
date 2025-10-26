@@ -18,7 +18,7 @@ export default function App() {
         <FeaturedProject />
         <ProjectsGallery />
         <ThoughtsSection />
-        <LearnSection />
+        {/* <LearnSection /> */}
         {/* <BlogSection /> */}
         <EventsTimeline />
         <DuoIntroduction />
