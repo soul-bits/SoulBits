@@ -67,7 +67,7 @@ export function Footer() {
                 className="hover:bg-primary/20 hover:text-primary"
                 asChild
               >
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/search/results/all/?keywords=%23soulbits" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="w-5 h-5" />
                 </a>
               </Button>
@@ -77,7 +77,7 @@ export function Footer() {
                 className="hover:bg-primary/20 hover:text-primary"
                 asChild
               >
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/@SoulBitsBuilds" target="_blank" rel="noopener noreferrer">
                   <Youtube className="w-5 h-5" />
                 </a>
               </Button>

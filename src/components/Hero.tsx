@@ -133,8 +133,9 @@ export function Hero() {
             <Button
               variant="outline"
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all px-8 py-6"
+              asChild
             >
-              <a href="#featured">Watch Demos</a>
+              <a href="https://www.youtube.com/@SoulBitsBuilds" target="_blank" rel="noopener noreferrer">Watch Demos</a>
             </Button>
           </div>
 
