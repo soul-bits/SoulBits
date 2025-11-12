@@ -116,6 +116,16 @@ export function DuoIntroduction() {
                 className="hover:bg-primary/20 hover:text-primary"
                 asChild
               >
+                <a href="https://guptaachin.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  <Globe className="w-5 h-5" />
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-primary/20 hover:text-primary"
+                asChild
+              >
                 <a href="https://linkedin.com/in/guptaachin" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="w-5 h-5" />
                 </a>
@@ -138,16 +148,6 @@ export function DuoIntroduction() {
               >
                 <a href="mailto:guptaachin01@gmail.com">
                   <Mail className="w-5 h-5" />
-                </a>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-primary/20 hover:text-primary"
-                asChild
-              >
-                <a href="https://guptaachin.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  <Globe className="w-5 h-5" />
                 </a>
               </Button>
             </div>
