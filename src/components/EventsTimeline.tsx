@@ -1,5 +1,7 @@
 import { motion } from "motion/react";
 import { Trophy, Mic, Calendar, Users } from "lucide-react";
+import tedImage from "../assets/ted.png";
+import buildathonImage from "../assets/buildathon-logo.png";
 
 const events = [
   {
@@ -7,14 +9,14 @@ const events = [
     date: "October 2025",
     description: "TED AI San Francisco Hackathon Winner - Google Gemini",
     icon: Trophy,
-    image: "https://images.unsplash.com/photo-1698502744308-b187f6612ead?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWNrYXRob24lMjB0ZWFtJTIwd2lubmVyfGVufDF8fHx8MTc2MTMyNzE5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: tedImage,
   },
   {
     title: "Buildathon 2025 Awardee",
     date: "July 2025",
     description: "Special Award in Graph Thinking - Recognized for innovative approach to graph-based problem solving.",
     icon: Trophy,
-    image: "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfHx8fDE3NjEzMDM0MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: buildathonImage,
   },
 ];
 
@@ -65,13 +67,13 @@ export function EventsTimeline() {
                     }}
                     className="bg-card rounded-2xl overflow-hidden border border-border/50 mt-16 cursor-pointer group"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-48 bg-card flex items-center justify-center p-4">
                       <img
                         src={event.image}
                         alt={event.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent pointer-events-none"></div>
                       
                       {/* Icon */}
                       <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
