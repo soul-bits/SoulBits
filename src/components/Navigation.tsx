@@ -40,12 +40,12 @@ export function Navigation() {
           >
             Learn
           </a> */}
-          <a
+          {/* <a
             href="#thoughts"
             className="text-foreground hover:text-primary transition-colors"
           >
             Thoughts
-          </a>
+          </a> */}
           <a
             href="#about"
             className="text-foreground hover:text-primary transition-colors"

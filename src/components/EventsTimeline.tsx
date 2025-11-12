@@ -3,32 +3,18 @@ import { Trophy, Mic, Calendar, Users } from "lucide-react";
 
 const events = [
   {
-    title: "TEDAI Hackathon Winner",
-    date: "October 2024",
-    description: "Won first place with Tiny Legends at TEDAI Hackathon",
+    title: "TED AI SF Hackathon Winner",
+    date: "October 2025",
+    description: "TED AI San Francisco Hackathon Winner - Google Gemini",
     icon: Trophy,
     image: "https://images.unsplash.com/photo-1698502744308-b187f6612ead?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYWNrYXRob24lMjB0ZWFtJTIwd2lubmVyfGVufDF8fHx8MTc2MTMyNzE5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
   },
   {
-    title: "Tech Talk: AI in Education",
-    date: "September 2024",
-    description: "Speaking at local university about AI applications",
-    icon: Mic,
-    image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-  {
-    title: "Global Hackathon 2024",
-    date: "August 2024",
-    description: "Participated in international coding challenge",
-    icon: Calendar,
+    title: "Buildathon 2025 Awardee",
+    date: "July 2025",
+    description: "Special Award in Graph Thinking - Recognized for innovative approach to graph-based problem solving.",
+    icon: Trophy,
     image: "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfHx8fDE3NjEzMDM0MDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  },
-  {
-    title: "Workshop: Building with AI",
-    date: "July 2024",
-    description: "Conducted workshop for aspiring developers",
-    icon: Users,
-    image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
   },
 ];
 

@@ -5,7 +5,6 @@ import { FeaturedProject } from "./components/FeaturedProject";
 import { ProjectsGallery } from "./components/ProjectsGallery";
 import { EventsTimeline } from "./components/EventsTimeline";
 import { LearnSection } from "./components/LearnSection";
-import { ThoughtsSection } from "./components/ThoughtsSection";
 import { BlogSection } from "./components/BlogSection";
 import { Footer } from "./components/Footer";
 
@@ -17,7 +16,6 @@ export default function App() {
         <Hero />
         <FeaturedProject />
         <ProjectsGallery />
-        <ThoughtsSection />
         {/* <LearnSection /> */}
         {/* <BlogSection /> */}
         <EventsTimeline />

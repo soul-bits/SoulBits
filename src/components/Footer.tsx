@@ -38,9 +38,9 @@ export function Footer() {
               <a href="#learn" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Learn
               </a>
-              <a href="#thoughts" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              {/* <a href="#thoughts" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Thoughts
-              </a>
+              </a> */}
               <a href="#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 About
               </a>
