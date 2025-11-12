@@ -28,11 +28,12 @@ const projects = [
     githubUrl: "https://github.com/soul-bits/EchoDeck",
   },
   {
-    title: "LeetCode Solutions",
-    description: "Collection of LeetCode problem solutions with detailed explanations and optimized approaches for coding interviews.",
-    image: "https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjB0ZWNofGVufDF8fHx8MTc2MTMyNjQ2M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    title: "Data Structures and Algo Solutions",
+    description: "Collection of DSA/LeetCode problem solutions with detailed explanations and optimized approaches for coding interviews.",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbGdvcml0aG0lMjBkYXRhJTIwc3RydWN0dXJlfGVufDF8fHx8fDE3NjEzMjc3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
     tags: ["Python", "Algorithms", "Data Structures"],
     githubUrl: "https://github.com/soul-bits/leetcode-solutions",
+    demoUrl: "https://www.youtube.com/@SoulBitsBuilds/playlists",
   },
 ];
 
