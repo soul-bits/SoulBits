@@ -5,9 +5,9 @@ import buildathonImage from "../assets/buildathon-logo.png";
 
 const events = [
   {
-    title: "TED AI SF Hackathon Winner",
+    title: "TED AI SF Hackathon",
     date: "October 2025",
-    description: "TED AI San Francisco Hackathon Winner - Google Gemini",
+    description: "Placed Second at TED AI San Francisco Hackathon - Google Gemini",
     icon: Trophy,
     image: tedImage,
   },
