@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import divyaPhoto from "../assets/Divya.jpeg";
 import achinPhoto from "../assets/Achin.jpeg";
@@ -138,6 +138,16 @@ export function DuoIntroduction() {
               >
                 <a href="mailto:guptaachin01@gmail.com">
                   <Mail className="w-5 h-5" />
+                </a>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-primary/20 hover:text-primary"
+                asChild
+              >
+                <a href="https://guptaachin.vercel.app/" target="_blank" rel="noopener noreferrer">
+                  <Globe className="w-5 h-5" />
                 </a>
               </Button>
             </div>
