@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Trophy, Mic, Calendar, Users } from "lucide-react";
 import tedImage from "../assets/ted.png";
+import ghcImage from "../assets/ghc.jpeg";
 import buildathonImage from "../assets/buildathon-logo.png";
 import daytonaImage from "../assets/daytona.jpeg";
 
@@ -20,6 +21,14 @@ const events = [
     icon: Trophy,
     image: tedImage,
     url: "https://tedai-sanfrancisco.ted.com/hackathon/",
+  },
+  {
+    title: "#SoulBits at GHC 2025",
+    date: "November 2025",
+    description: "Divya played a key role in enriching the learning culture by hosting multiple BrainDate sessions, creating a space for shared insights, growth, and genuine connection.",
+    icon: Trophy,
+    image: ghcImage,
+    url: "https://www.linkedin.com/posts/dm-divyamahajan_ghc25-ghc2025-amazon-activity-7393132716176728064-7AuC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
   },
   {
     title: "Daytona SF HackSprint 2025 Finalist",
