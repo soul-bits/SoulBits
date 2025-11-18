@@ -10,6 +10,7 @@ const events = [
     description: "Placed Second at TED AI San Francisco Hackathon - Google Gemini",
     icon: Trophy,
     image: tedImage,
+    url: "https://tedai-sanfrancisco.ted.com/hackathon/",
   },
   {
     title: "Buildathon 2025 Awardee",
@@ -17,6 +18,7 @@ const events = [
     description: "Special Award in Graph Thinking - Recognized for innovative approach to graph-based problem solving.",
     icon: Trophy,
     image: buildathonImage,
+    url: "https://www.linkedin.com/posts/aifund_what-an-amazing-day-of-building-we-welcomed-activity-7363266895174639617-bnEw/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
   },
 ];
 
@@ -65,7 +67,8 @@ export function EventsTimeline() {
                       y: -12, 
                       boxShadow: "0 25px 50px rgba(15, 242, 232, 0.3)"
                     }}
-                    className="bg-card rounded-2xl overflow-hidden border border-border/50 mt-16 cursor-pointer group"
+                    className={`bg-card rounded-2xl overflow-hidden border border-border/50 mt-16 group ${event.url ? 'cursor-pointer' : ''}`}
+                    onClick={() => event.url && window.open(event.url, '_blank', 'noopener,noreferrer')}
                   >
                     <div className="relative h-48 bg-card flex items-center justify-center p-4">
                       <img
