@@ -28,7 +28,7 @@ const events = [
     description: "Placed Second at TED AI San Francisco Hackathon - Google Gemini",
     icon: Trophy,
     image: tedImage,
-    url: "https://tedai-sanfrancisco.ted.com/hackathon/",
+    url: "https://tedai-sanfrancisco.ted.com/hackathon/#:~:text=Achin%20Gupta,Divya%20Mahajan",
   },
   {
     title: "Buildathon 2025 Awardee",
