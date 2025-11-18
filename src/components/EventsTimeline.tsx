@@ -1,26 +1,18 @@
 import { motion } from "motion/react";
 import { Trophy, Mic, Calendar, Users } from "lucide-react";
-import tedImage from "../assets/ted.png";
+import tedImage from "../assets/ted.jpeg";
 import ghcImage from "../assets/ghc.jpeg";
 import buildathonImage from "../assets/buildathon-logo.png";
 import daytonaImage from "../assets/daytona.jpeg";
 
 const events = [
   {
-    title: "Buildathon 2025 Awardee",
-    date: "July 2025",
-    description: "Special Award in Graph Thinking - Recognized for innovative approach to graph-based problem solving.",
+    title: "Daytona SF HackSprint 2025 Finalist",
+    date: "November 2025",
+    description: "Top 7 finalist in daytona hacksprint SF 2025",
     icon: Trophy,
-    image: buildathonImage,
-    url: "https://www.linkedin.com/posts/aifund_what-an-amazing-day-of-building-we-welcomed-activity-7363266895174639617-bnEw/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
-  },
-  {
-    title: "TED AI SF Hackathon",
-    date: "October 2025",
-    description: "Placed Second at TED AI San Francisco Hackathon - Google Gemini",
-    icon: Trophy,
-    image: tedImage,
-    url: "https://tedai-sanfrancisco.ted.com/hackathon/",
+    image: daytonaImage,
+    url: "https://www.linkedin.com/posts/guptaachin_soulbits-soulbits-adulting-activity-7396249755825344513-ycu9?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
   },
   {
     title: "#SoulBits at GHC 2025",
@@ -31,12 +23,20 @@ const events = [
     url: "https://www.linkedin.com/posts/dm-divyamahajan_ghc25-ghc2025-amazon-activity-7393132716176728064-7AuC?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
   },
   {
-    title: "Daytona SF HackSprint 2025 Finalist",
-    date: "November 2025",
-    description: "Top 7 finalist in daytona hacksprint SF 2025",
+    title: "TED AI SF Hackathon",
+    date: "October 2025",
+    description: "Placed Second at TED AI San Francisco Hackathon - Google Gemini",
     icon: Trophy,
-    image: daytonaImage,
-    url: "https://www.linkedin.com/posts/guptaachin_soulbits-soulbits-adulting-activity-7396249755825344513-ycu9?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
+    image: tedImage,
+    url: "https://tedai-sanfrancisco.ted.com/hackathon/",
+  },
+  {
+    title: "Buildathon 2025 Awardee",
+    date: "July 2025",
+    description: "Special Award in Graph Thinking - Recognized for innovative approach to graph-based problem solving.",
+    icon: Trophy,
+    image: buildathonImage,
+    url: "https://www.linkedin.com/posts/aifund_what-an-amazing-day-of-building-we-welcomed-activity-7363266895174639617-bnEw/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB9WcQ8BseTPDo7yLbQMF8a0X35Rh1O__1c",
   },
 ];
 
