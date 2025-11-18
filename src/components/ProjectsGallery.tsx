@@ -21,6 +21,14 @@ const projects = [
     demoUrl: "https://www.youtube.com/watch?v=R-OAZ-IH2NE&list=PLEFt4nVWzKBKpx5h_FCVg-K3oKxe2R8bY",
   },
   {
+    title: "Adulting · Alfred Life Assistant",
+    description: "AI life concierge that reads your calendar, handles the micro-tasks behind every event, and lets you ask Alfred directly to take care of anything so you can stay the superhero of your life.",
+    image: "https://img.youtube.com/vi/4oqPPJPyFXc/maxresdefault.jpg",
+    tags: ["React", "TypeScript", "AI", "Life Assistant"],
+    githubUrl: "https://github.com/soul-bits/adulting",
+    demoUrl: "https://www.youtube.com/watch?v=4oqPPJPyFXc",
+  },
+  {
     title: "EchoDeck",
     description: "AI-powered system that takes a short spoken prompt (≈3 minutes) and produces a polished presentation in multiple formats (PDF, HTML deck, narrated video).",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzZW50YXRpb24lMjBzbGlkZXN8ZW58MXx8fHwxNzYxMzI3NzUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
