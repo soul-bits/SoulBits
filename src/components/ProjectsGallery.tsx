@@ -41,7 +41,7 @@ const projects = [
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbGdvcml0aG0lMjBkYXRhJTIwc3RydWN0dXJlfGVufDF8fHx8fDE3NjEzMjc3NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
     tags: ["Python", "Algorithms", "Data Structures"],
     githubUrl: "https://github.com/soul-bits/leetcode-solutions",
-    demoUrl: "https://www.youtube.com/@SoulBitsBuilds/playlists",
+    demoUrl: "https://www.youtube.com/watch?v=_pOyA0v93rI&list=PLEFt4nVWzKBLDWYem5Pujw1VvdI2u-_Ar",
   },
 ];
 
