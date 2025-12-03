@@ -77,7 +77,7 @@ export function Footer() {
                 className="hover:bg-primary/20 hover:text-primary"
                 asChild
               >
-                <a href="https://www.youtube.com/@SoulBitsBuilds" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/channel/UCJ9bFPzRJuEk_EuoOq6ZQRg" target="_blank" rel="noopener noreferrer">
                   <Youtube className="w-5 h-5" />
                 </a>
               </Button>

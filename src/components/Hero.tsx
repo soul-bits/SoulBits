@@ -135,7 +135,7 @@ export function Hero() {
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all px-8 py-6"
               asChild
             >
-              <a href="https://www.youtube.com/@SoulBitsBuilds" target="_blank" rel="noopener noreferrer">Watch Demos</a>
+              <a href="https://www.youtube.com/channel/UCJ9bFPzRJuEk_EuoOq6ZQRg" target="_blank" rel="noopener noreferrer">Watch Demos</a>
             </Button>
           </div>
 
