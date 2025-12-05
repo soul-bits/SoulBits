@@ -35,12 +35,9 @@ export function Footer() {
               <a href="#events" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Events
               </a>
-              <a href="#learn" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Learn
+              <a href="#services" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Services
               </a>
-              {/* <a href="#thoughts" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Thoughts
-              </a> */}
               <a href="#about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 About
               </a>

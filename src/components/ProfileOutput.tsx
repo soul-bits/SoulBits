@@ -1,6 +1,7 @@
 import { Copy, CheckCircle, Sparkles, Download, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface ProfileOutputProps {
   feedback: string;
@@ -35,6 +36,89 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
     setShowDownloadMenu(false);
   };
 
+  // Helper function to parse inline markdown (bold, italic) in text
+  const parseInlineMarkdown = (text: string): Array<{ text: string; bold: boolean; italic: boolean }> => {
+    const parts: Array<{ text: string; bold: boolean; italic: boolean }> = [];
+    let currentText = '';
+    let inBold = false;
+    let inItalic = false;
+    let i = 0;
+
+    while (i < text.length) {
+      // Check for bold (**text**)
+      if (i < text.length - 1 && text[i] === '*' && text[i + 1] === '*' && !inItalic) {
+        if (currentText) {
+          parts.push({ text: currentText, bold: inBold, italic: inItalic });
+          currentText = '';
+        }
+        inBold = !inBold;
+        i += 2;
+        continue;
+      }
+      // Check for italic (*text* or _text_)
+      else if ((text[i] === '*' || text[i] === '_') && !inBold) {
+        if (currentText) {
+          parts.push({ text: currentText, bold: inBold, italic: inItalic });
+          currentText = '';
+        }
+        inItalic = !inItalic;
+        i += 1;
+        continue;
+      }
+      else {
+        currentText += text[i];
+        i += 1;
+      }
+    }
+
+    if (currentText) {
+      parts.push({ text: currentText, bold: inBold, italic: inItalic });
+    }
+
+    return parts;
+  };
+
+  // Helper function to render text with inline formatting in PDF
+  const renderFormattedText = (doc: any, text: string, x: number, y: number, maxWidth: number, fontSize: number): number => {
+    const parts = parseInlineMarkdown(text);
+    let currentX = x;
+    let currentY = y;
+    let lineHeight = fontSize * 1.2;
+
+    for (const part of parts) {
+      doc.setFontSize(fontSize);
+      if (part.bold && part.italic) {
+        doc.setFont('helvetica', 'bolditalic');
+      } else if (part.bold) {
+        doc.setFont('helvetica', 'bold');
+      } else if (part.italic) {
+        doc.setFont('helvetica', 'italic');
+      } else {
+        doc.setFont('helvetica', 'normal');
+      }
+
+      const words = part.text.split(' ');
+      for (const word of words) {
+        const testText = currentX === x ? word : ` ${word}`;
+        const textWidth = doc.getTextWidth(testText);
+        
+        if (currentX + textWidth > x + maxWidth && currentX > x) {
+          currentX = x;
+          currentY += lineHeight;
+        }
+
+        if (currentX === x) {
+          doc.text(word, currentX, currentY);
+        } else {
+          doc.text(` ${word}`, currentX, currentY);
+        }
+        currentX += textWidth;
+      }
+    }
+
+    return currentY + lineHeight;
+  };
+
   const handleDownloadPDF = async () => {
     try {
       const { jsPDF } = await import('jspdf');
@@ -66,25 +150,34 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
       
       // Parse and render markdown
       const lines = feedback.split('\n');
+      let inList = false;
       
-      for (let line of lines) {
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+        
         // Check if we need a new page
-        if (yPosition > pageHeight - margin) {
+        if (yPosition > pageHeight - margin - 10) {
           doc.addPage();
           yPosition = margin;
         }
         
         // Skip empty lines but add spacing
         if (line.trim() === '') {
-          yPosition += 4;
+          if (inList) {
+            yPosition += 2; // Less spacing in lists
+            inList = false;
+          } else {
+            yPosition += 4;
+          }
           continue;
         }
         
-        // Handle headers
+        // Handle headers with proper spacing
         if (line.startsWith('# ')) {
+          yPosition += 4; // Space before heading
           doc.setFontSize(16);
           doc.setFont('helvetica', 'bold');
-          const text = line.substring(2);
+          const text = line.substring(2).trim();
           const wrappedLines = doc.splitTextToSize(text, maxWidth);
           wrappedLines.forEach((l: string) => {
             if (yPosition > pageHeight - margin) {
@@ -94,11 +187,13 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
             doc.text(l, margin, yPosition);
             yPosition += 8;
           });
-          yPosition += 2;
+          yPosition += 4; // Space after heading
+          inList = false;
         } else if (line.startsWith('## ')) {
+          yPosition += 3; // Space before heading
           doc.setFontSize(14);
           doc.setFont('helvetica', 'bold');
-          const text = line.substring(3);
+          const text = line.substring(3).trim();
           const wrappedLines = doc.splitTextToSize(text, maxWidth);
           wrappedLines.forEach((l: string) => {
             if (yPosition > pageHeight - margin) {
@@ -108,11 +203,13 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
             doc.text(l, margin, yPosition);
             yPosition += 7;
           });
-          yPosition += 2;
+          yPosition += 3; // Space after heading
+          inList = false;
         } else if (line.startsWith('### ')) {
+          yPosition += 2; // Space before heading
           doc.setFontSize(12);
           doc.setFont('helvetica', 'bold');
-          const text = line.substring(4);
+          const text = line.substring(4).trim();
           const wrappedLines = doc.splitTextToSize(text, maxWidth);
           wrappedLines.forEach((l: string) => {
             if (yPosition > pageHeight - margin) {
@@ -122,72 +219,205 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
             doc.text(l, margin, yPosition);
             yPosition += 6;
           });
+          yPosition += 2; // Space after heading
+          inList = false;
+        } else if (line.startsWith('#### ')) {
           yPosition += 2;
-        }
-        // Handle bullet points
-        else if (line.match(/^[\-\*]\s/)) {
           doc.setFontSize(11);
-          doc.setFont('helvetica', 'normal');
-          const text = line.substring(2);
-          const wrappedLines = doc.splitTextToSize(text, maxWidth - 10);
-          wrappedLines.forEach((l: string, index: number) => {
-            if (yPosition > pageHeight - margin) {
-              doc.addPage();
-              yPosition = margin;
-            }
-            if (index === 0) {
-              doc.text('•', margin + 2, yPosition);
-              doc.text(l, margin + 10, yPosition);
-            } else {
-              doc.text(l, margin + 10, yPosition);
-            }
-            yPosition += 6;
-          });
-        }
-        // Handle numbered lists
-        else if (line.match(/^\d+\.\s/)) {
-          doc.setFontSize(11);
-          doc.setFont('helvetica', 'normal');
-          const match = line.match(/^(\d+)\.\s(.*)$/);
-          if (match) {
-            const number = match[1];
-            const text = match[2];
-            const wrappedLines = doc.splitTextToSize(text, maxWidth - 12);
-            wrappedLines.forEach((l: string, index: number) => {
-              if (yPosition > pageHeight - margin) {
-                doc.addPage();
-                yPosition = margin;
-              }
-              if (index === 0) {
-                doc.text(`${number}.`, margin + 2, yPosition);
-                doc.text(l, margin + 12, yPosition);
-              } else {
-                doc.text(l, margin + 12, yPosition);
-              }
-              yPosition += 6;
-            });
-          }
-        }
-        // Regular text with bold/italic support
-        else {
-          doc.setFontSize(11);
-          doc.setFont('helvetica', 'normal');
-          
-          // Simple bold detection (just set entire line to bold if it contains **)
-          if (line.includes('**')) {
-            doc.setFont('helvetica', 'bold');
-            line = line.replace(/\*\*/g, '');
-          }
-          
-          const wrappedLines = doc.splitTextToSize(line, maxWidth);
+          doc.setFont('helvetica', 'bold');
+          const text = line.substring(5).trim();
+          const wrappedLines = doc.splitTextToSize(text, maxWidth);
           wrappedLines.forEach((l: string) => {
             if (yPosition > pageHeight - margin) {
               doc.addPage();
               yPosition = margin;
             }
             doc.text(l, margin, yPosition);
-            yPosition += 6;
+            yPosition += 5;
           });
+          yPosition += 2;
+          inList = false;
+        }
+        // Handle bullet points (with indentation support)
+        else if (line.match(/^[\-\*]\s/)) {
+          inList = true;
+          doc.setFontSize(11);
+          const text = line.substring(2).trim();
+          
+          // Check for indentation (tabs or spaces at start)
+          const indentMatch = line.match(/^(\s+)[\-\*]/);
+          const indentLevel = indentMatch ? Math.floor(indentMatch[1].length / 2) : 0;
+          const indent = indentLevel * 8;
+          
+          // Render formatted text with bullet
+          if (yPosition > pageHeight - margin) {
+            doc.addPage();
+            yPosition = margin;
+          }
+          
+          doc.setFont('helvetica', 'normal');
+          doc.text('•', margin + indent, yPosition);
+          
+          // Render the text with inline formatting
+          const textParts = parseInlineMarkdown(text);
+          let textX = margin + indent + 6;
+          let textY = yPosition;
+          
+          for (const part of textParts) {
+            doc.setFontSize(11);
+            if (part.bold && part.italic) {
+              doc.setFont('helvetica', 'bolditalic');
+            } else if (part.bold) {
+              doc.setFont('helvetica', 'bold');
+            } else if (part.italic) {
+              doc.setFont('helvetica', 'italic');
+            } else {
+              doc.setFont('helvetica', 'normal');
+            }
+            
+            const words = part.text.split(' ');
+            for (const word of words) {
+              const spaceWidth = doc.getTextWidth(' ');
+              const wordWidth = doc.getTextWidth(word);
+              const testWidth = textX === margin + indent + 6 ? wordWidth : spaceWidth + wordWidth;
+              
+              if (textX + testWidth > margin + maxWidth && textX > margin + indent + 6) {
+                textX = margin + indent + 6;
+                textY += 6;
+                if (textY > pageHeight - margin) {
+                  doc.addPage();
+                  textY = margin;
+                }
+              }
+              
+              if (textX === margin + indent + 6) {
+                doc.text(word, textX, textY);
+                textX += wordWidth;
+              } else {
+                doc.text(` ${word}`, textX, textY);
+                textX += spaceWidth + wordWidth;
+              }
+            }
+          }
+          
+          yPosition = textY + 5;
+        }
+        // Handle numbered lists
+        else if (line.match(/^\d+\.\s/)) {
+          inList = true;
+          doc.setFontSize(11);
+          doc.setFont('helvetica', 'normal');
+          const match = line.match(/^(\d+)\.\s(.*)$/);
+          if (match) {
+            const number = match[1];
+            const text = match[2].trim();
+            
+            if (yPosition > pageHeight - margin) {
+              doc.addPage();
+              yPosition = margin;
+            }
+            
+            doc.text(`${number}.`, margin + 2, yPosition);
+            
+            // Render formatted text
+            const textParts = parseInlineMarkdown(text);
+            let textX = margin + 12;
+            let textY = yPosition;
+            
+            for (const part of textParts) {
+              doc.setFontSize(11);
+              if (part.bold && part.italic) {
+                doc.setFont('helvetica', 'bolditalic');
+              } else if (part.bold) {
+                doc.setFont('helvetica', 'bold');
+              } else if (part.italic) {
+                doc.setFont('helvetica', 'italic');
+              } else {
+                doc.setFont('helvetica', 'normal');
+              }
+              
+              const words = part.text.split(' ');
+              for (const word of words) {
+                const spaceWidth = doc.getTextWidth(' ');
+                const wordWidth = doc.getTextWidth(word);
+                const testWidth = textX === margin + 12 ? wordWidth : spaceWidth + wordWidth;
+                
+                if (textX + testWidth > margin + maxWidth && textX > margin + 12) {
+                  textX = margin + 12;
+                  textY += 6;
+                  if (textY > pageHeight - margin) {
+                    doc.addPage();
+                    textY = margin;
+                  }
+                }
+                
+                if (textX === margin + 12) {
+                  doc.text(word, textX, textY);
+                  textX += wordWidth;
+                } else {
+                  doc.text(` ${word}`, textX, textY);
+                  textX += spaceWidth + wordWidth;
+                }
+              }
+            }
+            
+            yPosition = textY + 5;
+          }
+        }
+        // Regular text with inline formatting
+        else {
+          inList = false;
+          doc.setFontSize(11);
+          
+          // Handle indentation (tabs or leading spaces)
+          const indentMatch = line.match(/^(\s+)/);
+          const indentLevel = indentMatch ? Math.floor(indentMatch[1].length / 2) : 0;
+          const indent = indentLevel * 8;
+          const text = line.trim();
+          
+          // Render formatted text
+          const textParts = parseInlineMarkdown(text);
+          let textX = margin + indent;
+          let textY = yPosition;
+          
+          for (const part of textParts) {
+            doc.setFontSize(11);
+            if (part.bold && part.italic) {
+              doc.setFont('helvetica', 'bolditalic');
+            } else if (part.bold) {
+              doc.setFont('helvetica', 'bold');
+            } else if (part.italic) {
+              doc.setFont('helvetica', 'italic');
+            } else {
+              doc.setFont('helvetica', 'normal');
+            }
+            
+            const words = part.text.split(' ');
+            for (const word of words) {
+              const spaceWidth = doc.getTextWidth(' ');
+              const wordWidth = doc.getTextWidth(word);
+              const testWidth = textX === margin + indent ? wordWidth : spaceWidth + wordWidth;
+              
+              if (textX + testWidth > margin + maxWidth && textX > margin + indent) {
+                textX = margin + indent;
+                textY += 6;
+                if (textY > pageHeight - margin) {
+                  doc.addPage();
+                  textY = margin;
+                }
+              }
+              
+              if (textX === margin + indent) {
+                doc.text(word, textX, textY);
+                textX += wordWidth;
+              } else {
+                doc.text(` ${word}`, textX, textY);
+                textX += spaceWidth + wordWidth;
+              }
+            }
+          }
+          
+          yPosition = textY + 5;
         }
       }
       
@@ -260,8 +490,10 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
         </div>
       )}
 
-      <div className="border rounded-lg p-6 bg-background max-h-[600px] overflow-y-auto prose prose-sm max-w-none whitespace-pre-wrap">
-        <ReactMarkdown>{feedback}</ReactMarkdown>
+      <div className="border rounded-lg p-6 bg-background max-h-[70vh] overflow-y-auto markdown-content">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {feedback}
+        </ReactMarkdown>
       </div>
     </div>
   );

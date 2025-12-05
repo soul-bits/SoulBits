@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { FileCheck, Shield, Lock, Server, ArrowLeft, Eye, ChevronDown, ChevronUp, FileText, X, Clipboard } from 'lucide-react';
+import { FileCheck, Shield, Lock, Server, ArrowLeft, Eye, ChevronDown, ChevronUp, FileText, X, Clipboard, Sparkles } from 'lucide-react';
 import { ProfileUpload } from './ProfileUpload';
 import { KeyInput } from './KeyInput';
 import { ProfileOutput } from './ProfileOutput';
@@ -10,6 +10,7 @@ import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export function ProfileReview() {
   const handleBack = () => {
@@ -291,183 +292,13 @@ ${resumeText}`;
           </div>
         </motion.div>
 
-        {/* Main Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          // className="grid md:grid-cols-2 gap-8 mb-8"
-        >
-          <div>
-            <div className="bg-card border rounded-lg p-6 shadow-sm">
-              <TypeSelector selectedType={feedbackType} onTypeChange={handleTypeChange} />
-            </div>
-
-                        <div className="bg-card border rounded-lg p-6 shadow-sm mb-8 mt-8 grid md:grid-cols-2 gap-8 mb-8">
-              <ProfileUpload onTextExtracted={handleTextExtracted} feedbackType={feedbackType} />
-              {/* Job Posting Section */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h2>Add Job Description</h2>
-                  <span className="text-muted-foreground">Optional</span>
-                </div>
-
-                {!jobPosting.trim() ? (
-                  <div className="relative">
-                    <div className="absolute inset-0 border-2 border-dashed rounded-lg pointer-events-none border-border" />
-                    {!jobPostingFocused && (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
-                        <Clipboard className="w-12 h-12 mb-4 text-muted-foreground" />
-                        <p className="mb-2 text-sm">Paste job description here</p>
-                        <p className="text-xs text-muted-foreground">or start typing</p>
-                      </div>
-                    )}
-                    <Textarea
-                      id="job-posting"
-                      placeholder={jobPostingFocused ? "Paste the job description here..." : ""}
-                      value={jobPosting}
-                      onChange={(e) => setJobPosting(e.target.value)}
-                      onFocus={() => setJobPostingFocused(true)}
-                      onBlur={() => {
-                        if (!jobPosting.trim()) {
-                          setJobPostingFocused(false);
-                        }
-                      }}
-                      className="min-h-[180px] resize-y bg-transparent relative z-20"
-                    />
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="border rounded-lg p-4 flex items-center justify-between bg-muted/30">
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-primary" />
-                        <span className="text-sm">Job description added</span>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setJobPosting('');
-                          setJobPostingFocused(false);
-                        }}
-                        className="p-1 hover:bg-destructive/10 rounded transition-colors"
-                      >
-                        <X className="w-5 h-5 text-destructive" />
-                      </button>
-                    </div>
-                    <Textarea
-                      id="job-posting-filled"
-                      placeholder="Paste the job description here..."
-                      value={jobPosting}
-                      onChange={(e) => setJobPosting(e.target.value)}
-                      onFocus={() => setJobPostingFocused(true)}
-                      onBlur={() => setJobPostingFocused(false)}
-                      className="min-h-[120px] resize-y"
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      ✓ Keyword optimization will be included in review
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {feedbackType === 'resume' && (
-              <>
-                {/* Visual Rules Section */}
-                <div className="bg-card border rounded-lg p-6 shadow-sm mb-8 mt-8">
-                  <button
-                    onClick={() => setShowVisualRules(!showVisualRules)}
-                    className="w-full flex items-center justify-between text-left"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Eye className="w-5 h-5 text-primary" />
-                      <Label className="text-base font-semibold cursor-pointer">
-                        Visual Formatting Guidelines
-                      </Label>
-                    </div>
-                    {showVisualRules ? (
-                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
-                    )}
-                  </button>
-                  <p className="text-sm text-muted-foreground mt-2 mb-3">
-                    <strong>Important:</strong> The AI review analyzes text content only. We cannot visually inspect PDF formatting, colors, fonts, or layout. Please review these guidelines to check your resume's visual formatting.
-                  </p>
-                  {showVisualRules && visualRulesContent && (
-                    <div className="mt-4 p-4 bg-muted/30 rounded-lg max-h-[400px] overflow-y-auto ">
-                      <div className="prose prose-sm max-w-none dark:prose-invert">
-                        <ReactMarkdown>{visualRulesContent}</ReactMarkdown>
-                      </div>
-                    </div>
-                  )}
-                  {showVisualRules && !visualRulesContent && (
-                    <div className="mt-4 p-4 bg-muted/30 rounded-lg text-sm text-muted-foreground">
-                      Loading visual rules...
-                    </div>
-                  )}
-                </div>
-
-
-              </>
-            )}
-            <div className="bg-card border rounded-lg p-6 shadow-sm">
-              <KeyInput onKeyChange={handleKeyChange} />
-            </div>
-
-
-            <Button
-              onClick={(e) => {
-                console.log('[ProfileReview] Button onClick triggered', { canReview, disabled: !canReview });
-                e.preventDefault();
-                handleReview();
-              }}
-              disabled={!canReview}
-              variant={canReview ? "default" : "secondary"}
-              size="lg"
-              className="w-full shadow-md hover:shadow-lg"
-            >
-              {isReviewing ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="animate-spin">⏳</span>
-                  {reviewStep === 'keyword' 
-                    ? 'Step 2: Analyzing Keyword Optimization...'
-                    : reviewStep === 'general'
-                    ? 'Step 1: Reviewing Content...'
-                    : 'Reviewing...'}
-                </span>
-              ) : (
-                `Review ${feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}${jobPosting.trim() && feedbackType === 'resume' ? ' (2 Steps)' : ''}`
-              )}
-            </Button>
-
-            {/* Debug info */}
-            <div className="p-4 bg-muted/50 border rounded-lg text-xs space-y-1">
-              <div className="font-semibold mb-2">Debug Info:</div>
-              <div>Has File: {resumeText ? `✓ (${resumeText.length} chars)` : '✗'}</div>
-              <div>Has API Key: {apiKey ? `✓ (${apiKey.length} chars)` : '✗'}</div>
-              <div>Provider: {provider || 'Not set'}</div>
-              <div>Can Review: {canReview ? '✓' : '✗'}</div>
-              <div>Is Reviewing: {isReviewing ? 'Yes' : 'No'}</div>
-            </div>
-
-            {error && (
-              <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive">
-                <strong>Error:</strong> {error}
-              </div>
-            )}
-          </div>
-
-
-        </motion.div>
-
-        {/* Footer Info */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="bg-muted/50 border rounded-lg p-6 mt-8"
         >
-          <h3 className="mb-3">How It Works</h3>
+          <h3 className="mb-3 font-semibold">How It Works</h3>
           <ol className="space-y-4 text-muted-foreground list-decimal list-inside">
             <li>1. Choose whether you're uploading a Resume or LinkedIn Profile</li>
             <li>2. Upload your file (PDF or DOCX) - parsed locally in your browser</li>
@@ -476,11 +307,240 @@ ${resumeText}`;
             <li>5. Get detailed feedback - displayed instantly in the browser</li>
           </ol>
           
-          <p className="mt-4 text-muted-foreground">
-            <br/>
+          <p className="mt-4 text-muted-foreground mt-8">
             <strong>Privacy guaranteed:</strong> Your files never touch our servers. Everything is processed entirely in your browser, and only sent directly to OpenAI or Gemini based on your API key choice.
           </p>
-          <div>
+        </motion.div>
+        
+        {/* Main Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="grid lg:grid-cols-2 gap-8 mb-8 mt-8"
+        >
+          <div className="space-y-6">
+            {/* Step 1: Type Selection */}
+            <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm">
+                  1
+                </div>
+                <h3 className="text-lg font-semibold">Select Review Type</h3>
+              </div>
+              <TypeSelector selectedType={feedbackType} onTypeChange={handleTypeChange} />
+            </div>
+
+            {/* Step 2: Upload & Job Description */}
+            <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm">
+                  2
+                </div>
+                <h3 className="text-lg font-semibold">Upload Your {feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}</h3>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <ProfileUpload onTextExtracted={handleTextExtracted} feedbackType={feedbackType} />
+                {/* Job Posting Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {/* <Clipboard className="w-5 h-5 text-primary" /> */}
+                      <h2 className="text-base font-semibold">Job Description</h2>
+                    </div>
+                    <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">Optional</span>
+                  </div>
+
+                  {!jobPosting.trim() ? (
+                    <div
+                      onClick={() => {
+                        const textarea = document.getElementById('job-posting');
+                        textarea?.focus();
+                      }}
+                      className={`
+                        border-2 border-dashed rounded-lg p-12 text-center cursor-pointer relative
+                        transition-colors min-h-[280px]
+                        ${jobPostingFocused ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}
+                      `}
+                    >
+                      {!jobPostingFocused && (
+                        <div className="pointer-events-none">
+                          <Clipboard className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                          <p className="mb-2 font-medium">
+                            Paste job description here
+                          </p>
+                          <p className="text-muted-foreground">or start typing to get keyword optimization</p>
+                        </div>
+                      )}
+                      <Textarea
+                        id="job-posting"
+                        placeholder=""
+                        value={jobPosting}
+                        onChange={(e) => setJobPosting(e.target.value)}
+                        onFocus={() => setJobPostingFocused(true)}
+                        onBlur={() => {
+                          if (!jobPosting.trim()) {
+                            setJobPostingFocused(false);
+                          }
+                        }}
+                        className="absolute inset-0 w-full h-full p-12 bg-transparent border-0 resize-none focus:outline-none focus:ring-0 text-left placeholder:text-transparent"
+                        style={{ minHeight: '100%' }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="border rounded-lg p-4 flex items-center justify-between bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                            <FileText className="w-5 h-5 text-primary" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold">Job description added</p>
+                            <p className="text-xs text-muted-foreground">Keyword optimization enabled</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setJobPosting('');
+                            setJobPostingFocused(false);
+                          }}
+                          className="p-2 hover:bg-destructive/10 rounded-lg transition-colors group"
+                          title="Remove job description"
+                        >
+                          <X className="w-4 h-4 text-destructive group-hover:scale-110 transition-transform" />
+                        </button>
+                      </div>
+                      <Textarea
+                        id="job-posting-filled"
+                        placeholder="Paste the job description here..."
+                        value={jobPosting}
+                        onChange={(e) => setJobPosting(e.target.value)}
+                        onFocus={() => setJobPostingFocused(true)}
+                        onBlur={() => setJobPostingFocused(false)}
+                        className="resize-y p-12"
+                      />
+                      <div className="flex items-center gap-2 text-xs text-primary bg-primary/10 px-3 py-2 rounded-lg">
+                        <span className="font-semibold">✓</span>
+                        <span>Keyword optimization will be included in review</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: API Key */}
+            <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-sm">
+                  3
+                </div>
+                <h3 className="text-lg font-semibold">Enter API Key</h3>
+              </div>
+              <KeyInput onKeyChange={handleKeyChange} />
+            </div>
+
+            {/* Step 4: Review Button */}
+            <div className="space-y-4">
+              <Button
+                onClick={(e) => {
+                  console.log('[ProfileReview] Button onClick triggered', { canReview, disabled: !canReview });
+                  e.preventDefault();
+                  handleReview();
+                }}
+                disabled={!canReview}
+                variant={canReview ? "default" : "secondary"}
+                size="lg"
+                className={`w-full shadow-lg hover:shadow-xl transition-all text-base font-semibold py-6 ${
+                  canReview 
+                    ? 'bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary' 
+                    : ''
+                }`}
+              >
+                {isReviewing ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <span className="animate-spin text-xl">⏳</span>
+                    <span>
+                      {reviewStep === 'keyword' 
+                        ? 'Step 2: Analyzing Keyword Optimization...'
+                        : reviewStep === 'general'
+                        ? 'Step 1: Reviewing Content...'
+                        : 'Reviewing...'}
+                    </span>
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    <Sparkles className="w-5 h-5" />
+                    {`Review ${feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}${jobPosting.trim() && feedbackType === 'resume' ? ' (2 Steps)' : ''}`}
+                  </span>
+                )}
+              </Button>
+
+              {error && (
+                <div className="p-4 bg-destructive/10 border-2 border-destructive/30 rounded-lg text-destructive shadow-lg">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/20 flex items-center justify-center mt-0.5">
+                      <X className="w-3 h-3 text-destructive" />
+                    </div>
+                    <div>
+                      <strong className="font-semibold block mb-1">Error</strong>
+                      <p className="text-sm">{error}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {feedbackType === 'resume' && (
+              <>
+                {/* Visual Rules Section */}
+                <div className="bg-gradient-to-br from-card to-card/80 border border-border/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                  <button
+                    onClick={() => setShowVisualRules(!showVisualRules)}
+                    className="w-full flex items-center justify-between text-left group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                        <Eye className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <Label className="text-base font-semibold cursor-pointer block">
+                          Visual Formatting Guidelines
+                        </Label>
+                        <p className="text-xs text-muted-foreground mt-0.5">Check your resume's visual formatting</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {showVisualRules ? (
+                        <ChevronUp className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      )}
+                    </div>
+                  </button>
+                  <div className="mt-4 p-4 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+                    <p className="text-sm text-amber-600 dark:text-amber-400">
+                      <strong className="font-semibold">Important:</strong> The AI review analyzes text content only. We cannot visually inspect PDF formatting, colors, fonts, or layout. Please review these guidelines to check your resume's visual formatting.
+                    </p>
+                  </div>
+                  {showVisualRules && visualRulesContent && (
+                    <div className="mt-4 p-6 bg-muted/30 rounded-lg max-h-[500px] overflow-y-auto border border-border/50 shadow-inner">
+                      <div className="markdown-content">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{visualRulesContent}</ReactMarkdown>
+                      </div>
+                    </div>
+                  )}
+                  {showVisualRules && !visualRulesContent && (
+                    <div className="mt-4 p-4 bg-muted/30 rounded-lg text-sm text-muted-foreground text-center">
+                      <span className="animate-pulse">Loading visual rules...</span>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          {/* Output Section */}
+          <div className="lg:sticky lg:top-8 lg:self-start">
             {feedback ? (
               <div className="bg-card border rounded-lg p-6 shadow-sm">
                 <ProfileOutput feedback={feedback} fileName={fileName || undefined} tokensUsed={tokensUsed} />
@@ -496,6 +556,7 @@ ${resumeText}`;
             )}
           </div>
         </motion.div>
+
       </div>
     </section>
   );
