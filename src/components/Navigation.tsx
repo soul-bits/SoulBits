@@ -34,6 +34,12 @@ export function Navigation() {
           >
             Events
           </a>
+          <a
+            href="#services"
+            className="text-foreground hover:text-primary transition-colors"
+          >
+            Services
+          </a>
           {/* <a
             href="#learn"
             className="text-foreground hover:text-primary transition-colors"
