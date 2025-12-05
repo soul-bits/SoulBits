@@ -168,11 +168,25 @@ export async function callLLM(request: LLMRequest): Promise<LLMResponse> {
 }
 
 /**
- * Load system prompt from resume-rules.md or linkedin-rules.md
+ * Load system prompt from resume-rules.md, linkedin-rules.md, or job-posting-rules.md
  */
-export async function loadSystemPrompt(type: 'resume' | 'linkedin' = 'resume'): Promise<string> {
+export async function loadSystemPrompt(type: 'resume' | 'linkedin' | 'job-posting' = 'resume'): Promise<string> {
   try {
-    const fileName = type === 'resume' ? '/resume-rules.md' : '/linkedin-rules.md';
+    let fileName: string;
+    switch (type) {
+      case 'resume':
+        fileName = '/resume-rules.md';
+        break;
+      case 'linkedin':
+        fileName = '/linkedin-rules.md';
+        break;
+      case 'job-posting':
+        fileName = '/job-posting-rules.md';
+        break;
+      default:
+        fileName = '/resume-rules.md';
+    }
+    
     console.log('[loadSystemPrompt] Loading prompt file:', fileName);
     const response = await fetch(fileName);
     console.log('[loadSystemPrompt] Fetch response:', { status: response.status, statusText: response.statusText, ok: response.ok });
