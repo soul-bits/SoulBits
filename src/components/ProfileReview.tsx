@@ -495,14 +495,41 @@ ${resumeText}`;
               >
                 {isReviewing ? (
                   <span className="flex items-center justify-center gap-3">
-                    <span className="animate-spin text-xl">⏳</span>
-                    <span>
-                      {reviewStep === 'keyword' 
-                        ? 'Step 2: Analyzing Keyword Optimization...'
-                        : reviewStep === 'general'
-                        ? 'Step 1: Reviewing Content...'
-                        : 'Reviewing...'}
-                    </span>
+                    <div className="relative flex items-center justify-center w-6 h-6">
+                      {/* Animated Spinner */}
+                      <motion.div
+                        className="absolute w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                      {/* Pulsing Dot in Center */}
+                      <motion.div
+                        className="absolute w-2 h-2 bg-primary rounded-full"
+                        animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      />
+                    </div>
+                    <motion.span
+                      key={reviewStep || 'reviewing'}
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex items-center gap-2"
+                    >
+                      <span>
+                        {reviewStep === 'keyword' 
+                          ? 'Step 2: Analyzing Keyword Optimization'
+                          : reviewStep === 'general'
+                          ? 'Step 1: Reviewing Content'
+                          : 'Reviewing'}
+                      </span>
+                      <motion.span
+                        animate={{ opacity: [1, 0.3, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        ...
+                      </motion.span>
+                    </motion.span>
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">
@@ -599,6 +626,81 @@ ${resumeText}`;
                 className="bg-gradient-to-br from-card via-card/95 to-card/90 border border-border/50 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-sm"
               >
                 <ProfileOutput feedback={feedback} fileName={fileName || undefined} tokensUsed={tokensUsed} />
+              </motion.div>
+            ) : isReviewing ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="bg-gradient-to-br from-card via-card/95 to-card/90 border border-border/50 rounded-2xl p-12 md:p-16 shadow-2xl backdrop-blur-sm flex flex-col items-center justify-center text-center min-h-[400px] md:min-h-[500px]"
+              >
+                {/* Animated Loading Spinner */}
+                <div className="relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 mb-8">
+                  {/* Outer Spinning Ring */}
+                  <motion.div
+                    className="absolute w-full h-full border-4 border-primary/20 border-t-primary rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                  />
+                  {/* Middle Spinning Ring (reverse direction) */}
+                  <motion.div
+                    className="absolute w-16 h-16 md:w-20 md:h-20 border-4 border-primary/30 border-b-primary rounded-full"
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  />
+                  {/* Pulsing Center Dot */}
+                  <motion.div
+                    className="absolute w-4 h-4 md:w-5 md:h-5 bg-primary rounded-full"
+                    animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </div>
+                
+                {/* Loading Text with Animation */}
+                <motion.div
+                  key={reviewStep || 'reviewing'}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-3"
+                >
+                  <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                    {reviewStep === 'keyword' 
+                      ? 'Analyzing Keyword Optimization'
+                      : reviewStep === 'general'
+                      ? 'Reviewing Your Profile'
+                      : 'Processing'}
+                  </h3>
+                  <p className="text-sm md:text-base text-muted-foreground flex items-center justify-center gap-2">
+                    <span>AI is analyzing your content</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0.3, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      ...
+                    </motion.span>
+                  </p>
+                  
+                  {/* Progress Dots */}
+                  <div className="flex items-center justify-center gap-2 mt-6">
+                    {[0, 1, 2].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="w-2 h-2 bg-primary rounded-full"
+                        animate={{
+                          scale: [1, 1.5, 1],
+                          opacity: [0.5, 1, 0.5],
+                        }}
+                        transition={{
+                          duration: 1.2,
+                          repeat: Infinity,
+                          delay: i * 0.2,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
               </motion.div>
             ) : (
               <div className="bg-gradient-to-br from-card/50 via-card/30 to-card/20 border-2 border-dashed border-border/50 rounded-2xl p-12 md:p-16 shadow-lg flex flex-col items-center justify-center text-center h-full min-h-[400px] md:min-h-[500px]">
