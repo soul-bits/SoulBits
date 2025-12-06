@@ -271,3 +271,4 @@ Your resume should:
 - Guide the reader's eye to important information
 
 Take the time to get your visual formatting right—it's worth the effort!
+

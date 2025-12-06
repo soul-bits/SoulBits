@@ -69,7 +69,7 @@ Hiring managers and recruiters spend only **10-15 seconds** initially reviewing 
 - **You're not getting filtered out by a robot—you're getting overlooked by a person**
 
 **What Actually Matters**:
-- ✅ **Readability**: ATS systems need to parse your resume to extract contact info—ensure your resume is readable by automated systems (see visual-rules for formatting guidelines)
+- ✅ **Readability**: ATS systems need to parse your resume to extract contact info—ensure your resume is readable by automated systems (see resume-visual-rules for formatting guidelines)
 - ✅ **Clarity for humans**: Recruiters skim fast—make your value obvious in the first few lines
 - ✅ **Natural keyword integration**: Keywords help recruiters find you when they search, but don't keyword stuff
 - ✅ **Business impact**: Show results, not just job duties
@@ -80,7 +80,7 @@ Hiring managers and recruiters spend only **10-15 seconds** initially reviewing 
 
 To create a job-ready resume with the highest chances of getting shortlisted, focus on these **three points**:
 
-1. **Best Template**: Professional, eye-catching, and readable by ATS systems (see visual-rules for template and formatting guidelines)
+1. **Best Template**: Professional, eye-catching, and readable by ATS systems (see resume-visual-rules for template and formatting guidelines)
 2. **Optimized Content**: Content that makes your value immediately clear to humans who are skimming in 10-15 seconds
 3. **Human Readability**: Structure and organization that supports quick scanning by recruiters
 

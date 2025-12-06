@@ -35,11 +35,11 @@ export function ProfileReview() {
   // Load visual rules when component mounts and feedbackType is resume
   useEffect(() => {
     if (feedbackType === 'resume') {
-      fetch('/visual-rules.md')
+      fetch('/resume-visual-rules.md')
         .then(response => response.text())
         .then(text => setVisualRulesContent(text))
         .catch(err => {
-          console.error('[ProfileReview] Failed to load visual-rules.md:', err);
+          console.error('[ProfileReview] Failed to load resume-visual-rules.md:', err);
           setVisualRulesContent(null);
         });
     } else {
@@ -69,10 +69,7 @@ export function ProfileReview() {
     setFileName(null);
     setFeedback(null);
     setError(null);
-    // Only clear job posting if switching away from resume
-    if (type !== 'resume') {
-      setJobPosting('');
-    }
+    // Job posting is supported for both resume and LinkedIn, so we keep it when switching
   };
 
   const handleReview = async () => {
@@ -134,13 +131,26 @@ export function ProfileReview() {
         totalTokensUsed += generalResponse.tokensUsed;
       }
 
-      // Step 2: Keyword Optimization Analysis (only if job posting provided and resume type)
-      if (feedbackType === 'resume' && jobPosting.trim()) {
+      // Step 2: Keyword Optimization Analysis (if job posting provided)
+      if (jobPosting.trim()) {
         setReviewStep('keyword');
         console.log('[ProfileReview] Step 2: Job posting provided, starting keyword optimization analysis');
         try {
           // Load job posting rules using loadSystemPrompt
           const jobPostingRules = await loadSystemPrompt('job-posting');
+          
+          // Determine sections based on feedback type
+          const isResume = feedbackType === 'resume';
+          const profileType = isResume ? 'resume' : 'LinkedIn profile';
+          const sections = isResume 
+            ? `- Professional title
+   - Professional summary
+   - Areas of expertise section
+   - Professional experience bullet points`
+            : `- Headline
+   - About section
+   - Skills section
+   - Experience descriptions`;
           
           // Create system prompt for keyword optimization
           const keywordSystemPrompt = `# Keyword Optimization Analysis Instructions
@@ -149,16 +159,13 @@ ${jobPostingRules}
 
 ## Your Task
 
-Analyze the resume provided by the user against the job posting they provided. Focus specifically on:
+Analyze the ${profileType} provided by the user against the job posting they provided. Focus specifically on:
 
 1. **Keyword Extraction**: Identify key skills and keywords from the job posting
-2. **Keyword Matching**: Analyze how well the resume matches these keywords
+2. **Keyword Matching**: Analyze how well the ${profileType} matches these keywords
 3. **Keyword Integration**: Evaluate where keywords appear (or should appear) in:
-   - Professional title
-   - Professional summary
-   - Areas of expertise section
-   - Professional experience bullet points
-4. **Missing Keywords**: Identify important keywords from the job posting that are missing from the resume
+${sections}
+4. **Missing Keywords**: Identify important keywords from the job posting that are missing from the ${profileType}
 5. **Recommendations**: Provide specific, actionable recommendations for improving keyword optimization
 
 Be specific and provide concrete examples. Reference the actual job posting requirements when making recommendations.
@@ -167,7 +174,7 @@ Be specific and provide concrete examples. Reference the actual job posting requ
 
 ${jobPosting.trim()}
 
-## Resume
+## ${isResume ? 'Resume' : 'LinkedIn Profile'}
 
 ${resumeText}`;
 
@@ -176,7 +183,7 @@ ${resumeText}`;
             provider,
             apiKey,
             systemPrompt: keywordSystemPrompt,
-            userMessage: `Please analyze the resume above against the job posting provided in the system instructions. Focus on keyword optimization, matching, and provide specific recommendations.`,
+            userMessage: `Please analyze the ${profileType} above against the job posting provided in the system instructions. Focus on keyword optimization, matching, and provide specific recommendations.`,
           });
 
           console.log('[ProfileReview] Step 2: Keyword optimization analysis completed', { 
@@ -492,7 +499,7 @@ ${resumeText}`;
                 ) : (
                   <span className="flex items-center justify-center gap-2">
                     <Sparkles className="w-5 h-5 md:w-6 md:h-6" />
-                    {`Review ${feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}${jobPosting.trim() && feedbackType === 'resume' ? ' (2 Steps)' : ''}`}
+                    {`Review ${feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}${jobPosting.trim() ? ' (2 Steps)' : ''}`}
                   </span>
                 )}
               </Button>
