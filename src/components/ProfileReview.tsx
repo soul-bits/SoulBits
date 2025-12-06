@@ -32,7 +32,7 @@ export function ProfileReview() {
   const [showVisualRules, setShowVisualRules] = useState(false);
   const [jobPostingFocused, setJobPostingFocused] = useState(false);
 
-  // Load visual rules when component mounts and feedbackType is resume
+  // Load visual rules when component mounts based on feedbackType
   useEffect(() => {
     if (feedbackType === 'resume') {
       fetch('/resume-visual-rules.md')
@@ -40,6 +40,14 @@ export function ProfileReview() {
         .then(text => setVisualRulesContent(text))
         .catch(err => {
           console.error('[ProfileReview] Failed to load resume-visual-rules.md:', err);
+          setVisualRulesContent(null);
+        });
+    } else if (feedbackType === 'linkedin') {
+      fetch('/linkedin-visual-rules.md')
+        .then(response => response.text())
+        .then(text => setVisualRulesContent(text))
+        .catch(err => {
+          console.error('[ProfileReview] Failed to load linkedin-visual-rules.md:', err);
           setVisualRulesContent(null);
         });
     } else {
@@ -524,7 +532,7 @@ ${resumeText}`;
             </div>
           </div>
 
-          {feedbackType === 'resume' && (
+          {(feedbackType === 'resume' || feedbackType === 'linkedin') && (
               <>
                 {/* Visual Rules Section */}
                 <div className="bg-gradient-to-br from-card via-card/95 to-card/90 border border-border/50 rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-primary/30 relative overflow-hidden group">
@@ -540,9 +548,11 @@ ${resumeText}`;
                         </div>
                         <div>
                           <Label className="text-base md:text-lg font-bold cursor-pointer block">
-                            Visual Formatting Guidelines
+                            Visual {feedbackType === 'resume' ? 'Formatting' : 'Profile'} Guidelines
                           </Label>
-                          <p className="text-xs md:text-sm text-muted-foreground mt-0.5">Check your resume's visual formatting</p>
+                          <p className="text-xs md:text-sm text-muted-foreground mt-0.5">
+                            Check your {feedbackType === 'resume' ? "resume's visual formatting" : "LinkedIn profile's visual elements"}
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -555,7 +565,7 @@ ${resumeText}`;
                     </button>
                     <div className="mt-4 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl shadow-sm">
                       <p className="text-sm md:text-base text-amber-600 dark:text-amber-400">
-                        <strong className="font-bold">Important:</strong> The AI review analyzes text content only. We cannot visually inspect PDF formatting, colors, fonts, or layout. Please review these guidelines to check your resume's visual formatting.
+                        <strong className="font-bold">Important:</strong> The AI review analyzes text content only. We cannot visually inspect {feedbackType === 'resume' ? 'PDF formatting, colors, fonts, or layout' : 'profile pictures, cover photos, or visual elements'}. Please review these guidelines to check your {feedbackType === 'resume' ? "resume's visual formatting" : "LinkedIn profile's visual elements"}.
                       </p>
                     </div>
                     {showVisualRules && visualRulesContent && (

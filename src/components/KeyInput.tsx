@@ -73,6 +73,18 @@ export function KeyInput({ onKeyChange }: KeyInputProps) {
             {showOpenai ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
         </div>
+        <div className="text-muted-foreground space-y-1">
+        <p>
+          <a
+            href="https://platform.openai.com/api-keys"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            Get OpenAI API key →
+          </a>
+        </p>
+      </div>
       </div>
 
       <div className="text-center text-muted-foreground">— OR —</div>
@@ -111,16 +123,6 @@ export function KeyInput({ onKeyChange }: KeyInputProps) {
       )}
 
       <div className="text-muted-foreground space-y-1">
-        <p>
-          <a
-            href="https://platform.openai.com/api-keys"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:underline"
-          >
-            Get OpenAI API key →
-          </a>
-        </p>
         <p>
           <a
             href="https://aistudio.google.com/app/apikey"

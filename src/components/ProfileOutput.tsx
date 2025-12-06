@@ -496,7 +496,7 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
         </div>
       )}
 
-      <div className="border border-border/50 rounded-xl p-6 md:p-8 bg-background/50 max-h-[70vh] overflow-y-auto markdown-content shadow-inner">
+      <div className="border border-border/50 rounded-xl p-6 md:p-8 bg-background/50 max-h-[70vh] overflow-y-auto markdown-content shadow-inner break-words">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {feedback}
         </ReactMarkdown>

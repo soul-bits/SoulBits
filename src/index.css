@@ -2354,6 +2354,9 @@ html {
 .markdown-content {
   line-height: 1.7;
   color: var(--foreground);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .markdown-content h1 {
@@ -2416,6 +2419,8 @@ html {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .markdown-content strong,
@@ -2481,6 +2486,9 @@ html {
   font-size: 0.875em;
   font-family: var(--font-courier), monospace;
   color: var(--primary);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .markdown-content pre {
@@ -2522,6 +2530,9 @@ html {
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .markdown-content a:hover {
