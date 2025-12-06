@@ -72,8 +72,8 @@ export function ProfileUpload({ onTextExtracted, feedbackType }: ProfileUploadPr
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2>Upload {feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}</h2>
-        <span className="text-muted-foreground">PDF or DOCX</span>
+        <h2 className="text-base md:text-lg font-semibold">Upload {feedbackType === 'resume' ? 'Resume' : 'LinkedIn Profile'}</h2>
+        <span className="text-xs md:text-sm text-muted-foreground px-2 py-1 bg-muted/50 rounded-lg">PDF or DOCX</span>
       </div>
 
       {!uploadedFile ? (
@@ -86,17 +86,19 @@ export function ProfileUpload({ onTextExtracted, feedbackType }: ProfileUploadPr
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
           className={`
-            border-2 border-dashed rounded-lg p-12 text-center cursor-pointer
-            transition-colors
-            ${isDragging ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}
+            border-2 border-dashed rounded-xl p-8 md:p-12 text-center cursor-pointer
+            transition-all duration-300 min-h-[200px] md:min-h-[240px] flex flex-col items-center justify-center
+            ${isDragging ? 'border-primary bg-primary/5 shadow-lg scale-[1.02]' : 'border-border hover:border-primary/50 hover:bg-muted/30'}
             ${isProcessing ? 'opacity-50 pointer-events-none' : ''}
           `}
         >
-          <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-          <p className="mb-2">
+          <div className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 p-3 rounded-full bg-muted/50 flex items-center justify-center">
+            <Upload className={`w-6 h-6 md:w-8 md:h-8 ${isDragging ? 'text-primary' : 'text-muted-foreground'} transition-colors`} />
+          </div>
+          <p className="mb-2 font-semibold text-sm md:text-base">
             {isProcessing ? 'Processing...' : `Drag & drop your ${feedbackType === 'resume' ? 'resume' : 'LinkedIn profile'} here`}
           </p>
-          <p className="text-muted-foreground">or click to browse</p>
+          <p className="text-muted-foreground text-xs md:text-sm">or click to browse</p>
           <input
             ref={fileInputRef}
             type="file"
@@ -106,24 +108,27 @@ export function ProfileUpload({ onTextExtracted, feedbackType }: ProfileUploadPr
           />
         </div>
       ) : (
-        <div className="border rounded-lg p-4 flex items-center justify-between bg-muted/30">
+        <div className="border border-border/50 rounded-xl p-4 flex items-center justify-between bg-gradient-to-r from-primary/5 via-primary/3 to-primary/5 shadow-sm">
           <div className="flex items-center gap-3">
-            <FileText className="w-5 h-5 text-primary" />
-            <span>{uploadedFile}</span>
+            <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shadow-sm border border-primary/20">
+              <FileText className="w-5 h-5 text-primary" />
+            </div>
+            <span className="font-medium text-sm md:text-base">{uploadedFile}</span>
           </div>
           <button
             onClick={handleRemove}
-            className="p-1 hover:bg-destructive/10 rounded transition-colors"
+            className="p-2 hover:bg-destructive/10 rounded-lg transition-colors group"
+            title="Remove file"
           >
-            <X className="w-5 h-5 text-destructive" />
+            <X className="w-5 h-5 text-destructive group-hover:scale-110 transition-transform" />
           </button>
         </div>
       )}
 
       {error && (
-        <div className="flex items-start gap-2 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+        <div className="flex items-start gap-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl shadow-sm">
           <AlertCircle className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
-          <p className="text-yellow-700">{error}</p>
+          <p className="text-sm md:text-base text-yellow-700 dark:text-yellow-600">{error}</p>
         </div>
       )}
     </div>

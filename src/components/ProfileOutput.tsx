@@ -431,49 +431,51 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-primary" />
-          <h2>AI Feedback</h2>
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shadow-sm border border-primary/20">
+            <Sparkles className="w-5 h-5 text-primary" />
+          </div>
+          <h2 className="text-xl md:text-2xl font-bold">AI Feedback</h2>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-3 py-1.5 border rounded-lg hover:bg-muted transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-border/50 rounded-xl hover:bg-muted/80 transition-all duration-200 hover:shadow-md hover:border-primary/30 text-sm md:text-base font-medium"
           >
             {copied ? (
               <>
                 <CheckCircle className="w-4 h-4 text-green-600" />
-                Copied!
+                <span>Copied!</span>
               </>
             ) : (
               <>
                 <Copy className="w-4 h-4" />
-                Copy
+                <span>Copy</span>
               </>
             )}
           </button>
           <div className="relative">
             <button
               onClick={() => setShowDownloadMenu(!showDownloadMenu)}
-              className="flex items-center gap-2 px-3 py-1.5 border rounded-lg hover:bg-muted transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-border/50 rounded-xl hover:bg-muted/80 transition-all duration-200 hover:shadow-md hover:border-primary/30 text-sm md:text-base font-medium"
             >
               <Download className="w-4 h-4" />
-              Download
+              <span>Download</span>
               <ChevronDown className="w-3 h-3" />
             </button>
             {showDownloadMenu && (
-              <div className="absolute right-0 mt-2 w-40 bg-background border rounded-lg shadow-lg z-10">
+              <div className="absolute right-0 mt-2 w-44 bg-background border border-border/50 rounded-xl shadow-xl z-10 overflow-hidden backdrop-blur-sm">
                 <button
                   onClick={handleDownloadMarkdown}
-                  className="w-full text-left px-4 py-2 hover:bg-muted transition-colors rounded-t-lg"
+                  className="w-full text-left px-4 py-3 hover:bg-muted/80 transition-colors text-sm md:text-base"
                 >
                   Markdown (.md)
                 </button>
                 <button
                   onClick={handleDownloadPDF}
-                  className="w-full text-left px-4 py-2 hover:bg-muted transition-colors rounded-b-lg"
+                  className="w-full text-left px-4 py-3 hover:bg-muted/80 transition-colors text-sm md:text-base border-t border-border/50"
                 >
                   PDF (.pdf)
                 </button>
@@ -484,13 +486,17 @@ export function ProfileOutput({ feedback, fileName, tokensUsed }: ProfileOutputP
       </div>
 
       {fileName && (
-        <div className="flex items-center justify-between text-muted-foreground p-3 bg-muted/30 rounded-lg">
-          <span>Review for: {fileName}</span>
-          {tokensUsed && <span>{tokensUsed} tokens used</span>}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-muted-foreground p-4 bg-muted/40 rounded-xl border border-border/50 shadow-sm">
+          <span className="text-sm md:text-base font-medium">Review for: <span className="text-foreground">{fileName}</span></span>
+          {tokensUsed && (
+            <span className="text-xs md:text-sm px-3 py-1 bg-primary/10 text-primary rounded-lg font-medium">
+              {tokensUsed.toLocaleString()} tokens used
+            </span>
+          )}
         </div>
       )}
 
-      <div className="border rounded-lg p-6 bg-background max-h-[70vh] overflow-y-auto markdown-content">
+      <div className="border border-border/50 rounded-xl p-6 md:p-8 bg-background/50 max-h-[70vh] overflow-y-auto markdown-content shadow-inner">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {feedback}
         </ReactMarkdown>
