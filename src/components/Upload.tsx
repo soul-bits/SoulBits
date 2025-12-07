@@ -20,7 +20,7 @@ export function UploadComponent({ onTextExtracted, feedbackType }: UploadProps) 
     setIsProcessing(true);
 
     try {
-      const text = await parseResumeFile(file);
+      const text = await parseResumeFile(file, feedbackType);
       const tokenCount = estimateTokenCount(text);
 
       // Warn about large files

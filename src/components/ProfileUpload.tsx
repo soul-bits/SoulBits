@@ -22,7 +22,7 @@ export function ProfileUpload({ onTextExtracted, feedbackType }: ProfileUploadPr
 
     try {
       console.log('[ProfileUpload] Parsing file...');
-      const text = await parseResumeFile(file);
+      const text = await parseResumeFile(file, feedbackType);
       console.log('[ProfileUpload] File parsed successfully, text length:', text.length);
       const tokenCount = estimateTokenCount(text);
       console.log('[ProfileUpload] Estimated tokens:', tokenCount);
