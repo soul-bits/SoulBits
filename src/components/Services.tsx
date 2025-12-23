@@ -53,7 +53,7 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl mb-4">Our Services</h2>
+          <h2 className="text-5xl mb-4">Free Services</h2>
           <p className="text-xl text-muted-foreground mb-2">
             Comprehensive support for your career and technical growth
           </p>
